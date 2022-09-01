@@ -1,6 +1,8 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 QBCore.Functions.CreateUseableItem("wheelchair", function(source)
-    TriggerClientEvent('wheelchair', source)
-    print('usado')
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.RemoveItem('wheelchair', 1)
+    TriggerClientEvent('wheelchair', src)
 end)
