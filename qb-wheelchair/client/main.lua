@@ -7,7 +7,7 @@ AddEventHandler('wheelchair', function()
         local wheelChairModel = 'iak_wheelchair'
         RequestModel(wheelChairModel)
         while not HasModelLoaded(wheelChairModel) do
-            Citizen.Wait(0)
+            Wait()
         end
         wheelChair = CreateVehicle(wheelChairModel, GetEntityCoords(PlayerPedId()), GetEntityHeading(PlayerPedId()), true, false)
         SetVehicleOnGroundProperly(wheelChair)
@@ -17,7 +17,6 @@ AddEventHandler('wheelchair', function()
         local wheelChairPlate = GetVehicleNumberPlateText(wheelChair)
         TriggerEvent("vehiclekeys:client:SetOwner", wheelChairPlate)
         SetVehicleEngineOn(wheelChair, true, true)
-        exports['LegacyFuel']:SetFuel(wheelChair, 100)
     elseif DoesEntityExist(wheelChair) and #(GetEntityCoords(wheelChair) - GetEntityCoords(PlayerPedId())) < 3.0 and GetPedInVehicleSeat(wheelChair,-1) == 0 then
         DeleteVehicle(wheelChair)
         wheelChair = nil
