@@ -23,4 +23,21 @@ AddEventHandler('wheelchair', function()
     else
         QBCore.Functions.Notify("Too far from the chair or someone is sitting on it")
     end
+    exports['qb-target']:AddTargetEntity(wheelChair, {
+        options = {
+            {
+                type = "client",
+                event = "qb-wheelchair:client:deletewheelchair",
+                icon = "fas fa-car",
+                label = 'Remove WheelChair',
+            },
+        },
+        distance = 2.0
+    })
+
+end)
+
+RegisterNetEvent('qb-wheelchair:client:deletewheelchair', function()
+    DeleteVehicle(wheelChair)
+    TriggerServerEvent("QBCore:Server:AddItem", "wheelchair", 1)
 end)
